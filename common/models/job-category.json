@@ -1,0 +1,105 @@
+{
+  "name": "JobCategory",
+  "plural": "job-categories",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "jobs": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": ""
+    },
+    "teamMembers": {
+      "type": "hasMany",
+      "model": "TeamMember",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {
+    "getAllCategories": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/get-all-categories",
+          "verb": "get"
+        }
+      ]
+    },
+    "addNewCategory": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "description": "name, description",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/add-new-category",
+          "verb": "post"
+        }
+      ]
+    },
+    "deleteCategory": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "description": "id",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/delete-category",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

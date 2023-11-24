@@ -1,0 +1,543 @@
+{
+  "name": "Job",
+  "plural": "jobs",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "new"
+    },
+    "isAcceptedByCompany": {
+      "type": "boolean",
+      "default": "0"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "assignees": {
+      "type": "hasOne",
+      "model": "Assignee",
+      "foreignKey": ""
+    },
+    "jobCategory": {
+      "type": "belongsTo",
+      "model": "JobCategory",
+      "foreignKey": ""
+    },
+    "teamMember": {
+      "type": "belongsTo",
+      "model": "TeamMember",
+      "foreignKey": ""
+    },
+    "company": {
+      "type": "belongsTo",
+      "model": "Company",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {
+    "showNewJobsAgainstCompany": {
+      "accepts": [
+        {
+          "arg": "companyId",
+          "type": "number",
+          "required": false,
+          "description": "companyId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show the tasks according to the selected filter",
+      "http": [
+        {
+          "path": "/show-new-jobs-against-company",
+          "verb": "get"
+        }
+      ]
+    },
+    "showInProgressJobsAgainstCompany": {
+      "accepts": [
+        {
+          "arg": "companyId",
+          "type": "number",
+          "required": false,
+          "description": "companyId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show the tasks according to the selected filter",
+      "http": [
+        {
+          "path": "/show-inprogress-jobs-against-company",
+          "verb": "get"
+        }
+      ]
+    },
+    "showInProgressJobsAgainstTeamMember": {
+      "accepts": [
+        {
+          "arg": "companyId",
+          "type": "number",
+          "required": false,
+          "description": "companyId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show the tasks according to the selected filter",
+      "http": [
+        {
+          "path": "/show-inprogress-jobs-against-teamMember",
+          "verb": "get"
+        }
+      ]
+    },
+    "createJob": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "customUserId, ",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will create the job/task",
+      "http": [
+        {
+          "path": "/create-job",
+          "verb": "post"
+        }
+      ]
+    },
+    "acceptJob": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "acceptorId, jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will",
+      "http": [
+        {
+          "path": "/accept-job",
+          "verb": "post"
+        }
+      ]
+    },
+    "rejectJob": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "rejectorId, jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will",
+      "http": [
+        {
+          "path": "/reject-job",
+          "verb": "post"
+        }
+      ]
+    },
+    "assignJob": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "companyId, jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will",
+      "http": [
+        {
+          "path": "/assign-job",
+          "verb": "post"
+        }
+      ]
+    },
+    "assignJobToTeamMember": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "teamMemberId, jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will",
+      "http": [
+        {
+          "path": "/assign-job-to-teamMember",
+          "verb": "post"
+        }
+      ]
+    },
+    "accomplishJob": {
+      "accepts": [
+        {
+          "arg": "jobId",
+          "type": "number",
+          "required": false,
+          "description": "jobId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will",
+      "http": [
+        {
+          "path": "/accomplish-job",
+          "verb": "post"
+        }
+      ]
+    },
+    "showAssignedJobsAgainstSystemAdmin": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show the tasks according to the selected filter",
+      "http": [
+        {
+          "path": "/show-assigned-jobs-against-system-admin",
+          "verb": "get"
+        }
+      ]
+    },
+    "showNewJobsAgainstSystemAdmin": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show the tasks according to the selected filter",
+      "http": [
+        {
+          "path": "/show-new-jobs-against-system-admin",
+          "verb": "get"
+        }
+      ]
+    },
+    "showInProgressJobsAgainstCompanyForAdmin": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show the tasks according to the selected filter",
+      "http": [
+        {
+          "path": "/show-inprogress-jobs-against-companyForAdmin",
+          "verb": "get"
+        }
+      ]
+    },
+    "getAllJobsAgainstServiceTaker": {
+      "accepts": [
+        {
+          "arg": "customUserId",
+          "type": "number",
+          "required": false,
+          "description": "customUserId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/show-all-jobs-against-service-taker",
+          "verb": "get"
+        }
+      ]
+    },
+    "getJobsAgainstServiceTakerWithFilter": {
+      "accepts": [
+        {
+          "arg": "customUserId",
+          "type": "number",
+          "required": false,
+          "description": "customUserId",
+          "http": {
+            "source": "query"
+          }
+        },
+        {
+          "arg": "status",
+          "type": "string",
+          "required": false,
+          "description": "inProgress, completed",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/show-jobs-against-service-taker-with-filter",
+          "verb": "get"
+        }
+      ]
+    },
+    "getJobsAgainstTeamMemberWithFilter": {
+      "accepts": [
+        {
+          "arg": "teamMemberId",
+          "type": "number",
+          "required": false,
+          "description": "teamMemberId",
+          "http": {
+            "source": "query"
+          }
+        },
+        {
+          "arg": "status",
+          "type": "string",
+          "required": false,
+          "description": "inProgress, completed",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/show-jobs-against-team-member-with-filter",
+          "verb": "get"
+        }
+      ]
+    },
+    "JobAcceptanceBySystemAdmin": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/Job-acceptance-by-systemAdmin",
+          "verb": "post"
+        }
+      ]
+    },
+    "JobAcceptanceByCompany": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/Job-acceptance-by-company",
+          "verb": "post"
+        }
+      ]
+    },
+    "MarkJobAsDone": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "jobId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/mark-job-as-done",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

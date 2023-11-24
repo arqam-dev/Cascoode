@@ -1,0 +1,237 @@
+{
+  "name": "CustomUser",
+  "plural": "custom-users",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "createdAt": "created",
+      "updatedAt": "updated",
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    }
+  },
+  "properties": {
+    "phoneNo": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "about": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "chatHistories": {
+      "type": "hasMany",
+      "model": "ChatHistory",
+      "foreignKey": "customUserId"
+    },
+    "companies": {
+      "type": "hasOne",
+      "model": "Company",
+      "foreignKey": ""
+    },
+    "jobs": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": ""
+    },
+    "assignees": {
+      "type": "hasMany",
+      "model": "Assignee",
+      "foreignKey": ""
+    },
+    "teamMembers": {
+      "type": "hasOne",
+      "model": "TeamMember",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {
+    "createCustomUser": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": false,
+          "description": "username, password, email, customRoleId",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will create a user",
+      "http": [
+        {
+          "path": "/create-custom-user",
+          "verb": "post"
+        }
+      ]
+    },
+    "showUsersListForOneToOneChat": {
+      "accepts": [
+        {
+          "arg": "customUserId",
+          "type": "number",
+          "required": false,
+          "description": "customUserId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "This will show",
+      "http": [
+        {
+          "path": "/show-users-list-for-OneToOne-chat",
+          "verb": "get"
+        }
+      ]
+    },
+    "Invite": {
+      "accepts": [
+        {
+          "arg": "email",
+          "type": "string",
+          "required": true,
+          "description": "User email to invite",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/send-invitation",
+          "verb": "post"
+        }
+      ]
+    },
+    "ViewServiceProviderProfile": {
+      "accepts": [
+        {
+          "arg": "customUserId",
+          "type": "number",
+          "required": true,
+          "description": "This will show profile against user id",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/view-service-provider-profile",
+          "verb": "get"
+        }
+      ]
+    },
+    "EditServiceProvider": {
+      "accepts": [
+        {
+          "arg": "User Data",
+          "type": "object",
+          "required": true,
+          "description": "Data for profile Edit",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/edit-service-provider-profile",
+          "verb": "post"
+        }
+      ]
+    },
+    "RegisterCustomUser": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": true,
+          "description": "Data for profile",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/register-custom-user",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

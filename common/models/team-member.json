@@ -1,0 +1,82 @@
+{
+  "name": "TeamMember",
+  "plural": "team-members",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "jobCategory": {
+      "type": "belongsTo",
+      "model": "JobCategory",
+      "foreignKey": ""
+    },
+    "jobs": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {
+    "ViewTeam": {
+      "accepts": [
+        {
+          "arg": "companyId",
+          "type": "number",
+          "required": true,
+          "description": "customUserId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/view-team",
+          "verb": "get"
+        }
+      ]
+    },
+    "AddNewMember": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": true,
+          "description": "customUserId, companyId, ",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/add-new-member",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

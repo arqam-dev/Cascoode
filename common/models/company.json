@@ -1,0 +1,178 @@
+{
+  "name": "Company",
+  "plural": "companies",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slogan": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "postalcode": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "teamMembers": {
+      "type": "hasMany",
+      "model": "TeamMember",
+      "foreignKey": ""
+    },
+    "jobs": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {
+    "CreateCompany": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "required": true,
+          "description": "",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/create-company",
+          "verb": "post"
+        }
+      ]
+    },
+    "ViewCompany": {
+      "accepts": [
+        {
+          "arg": "customUserId",
+          "type": "number",
+          "required": true,
+          "description": "customUserId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/view-company-profile",
+          "verb": "get"
+        }
+      ]
+    },
+    "EditCompany": {
+      "accepts": [
+        {
+          "arg": "object",
+          "type": "object",
+          "required": true,
+          "description": "name, ",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/edit-company-profile",
+          "verb": "post"
+        }
+      ]
+    },
+    "getCompanyIdAgainstUser": {
+      "accepts": [
+        {
+          "arg": "customUserId",
+          "type": "number",
+          "required": true,
+          "description": "customUserId",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/get-company-id-against-user",
+          "verb": "get"
+        }
+      ]
+    },
+    "getAllCompaniesList": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "Response",
+          "type": "object",
+          "root": true,
+          "description": "Response"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/view-companies-list",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}
